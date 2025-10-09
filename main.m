@@ -52,6 +52,10 @@ xlabel("Iteration number")
 ylabel("Relative frobenius norm of mismatch per channel")
 legend("Red channel", "Green channel", "Blue channel")
 
+
+%note: its kind of funny that the blue channel is worse: there are almost
+%no blue pixels to reconstruct so the relative error on blue is also larger
+
 %tensor completion algorithm here
 opts_tensor = [];
 TensorCompletion(sampled_image, mask, opts_tensor);
