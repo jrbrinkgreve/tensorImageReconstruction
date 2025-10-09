@@ -1,5 +1,5 @@
 %the main file from which subfunctions can be called
-
+close all
 %preprocessing
 image_full = double(imread("4.2.07.tiff")) / 255; 
 
@@ -25,7 +25,9 @@ title("Subsampled image")
 
 
 
-%separate matrix completion algorithm here...
+%BASIC MATRIX COMPLETION ALG HERE
+
+
 
 %note: please do not touch these settings
 delta = 1.5;     %stepsize: between 0 and 2 should work
@@ -38,9 +40,13 @@ opts_matrix = [delta eps tau l kmax k0]; %input options vector
 
 
 [rec_img_matrix, rel_error_matrix] = SeparateMatrixCompletion(sampled_image, mask, opts_matrix);
+
+
+
 figure
 imshow(rec_img_matrix * 255) % rescaling to 0-255 RGB dynamic range
 title("Reconstructed image via separate channel matrix completion")
+
 
 figure
 semilogy(1:kmax, rel_error_matrix(:,1), color='red')
@@ -56,6 +62,49 @@ legend("Red channel", "Green channel", "Blue channel")
 %note: its kind of funny that the blue channel is worse: there are almost
 %no blue pixels to reconstruct so the relative error on blue is also larger
 
+
+
+
+
+
+
+%--------------------------------------------------------------------------------------------------------
+
+%{
+
+%MATRIX COMPLETION IN FOURIER SPACE
+
+%note: please do not touch these settings
+delta = 1.5;     %stepsize: between 0 and 2 should work
+eps = 1e-10;    %fro norm tolerance: past this point break loop
+tau = 0.2 * shape(1);   %to compensate for scaling of fft2(*) operation, just a suggested fix, not sure this is good
+l = 1;         %not in use currently, should be related to size of svd later for speedup
+kmax = 50;    %very slow 
+k0 = 1;        %initial guess magnitude
+opts_matrix = [delta eps tau l kmax k0]; %input options vector
+
+
+[rec_img_matrix, rel_error_matrix] = FourierSeparateMatrixCompletion(sampled_image, mask, opts_matrix);
+figure
+imshow(rec_img_matrix * 255) % rescaling to 0-255 RGB dynamic range
+title("Reconstructed image via separate channel matrix completion: fourier")
+
+figure
+semilogy(1:kmax, rel_error_matrix(:,1), color='red')
+hold on
+semilogy(1:kmax, rel_error_matrix(:,2),color='green')
+semilogy(1:kmax, rel_error_matrix(:,3),color='blue')
+title("Convergence of each individual channel, relative errors per channel")
+xlabel("Iteration number")
+ylabel("Relative frobenius norm of mismatch per channel")
+legend("Red channel", "Green channel", "Blue channel")
+
+
+
+%}
+
+
+%--------------------------------------------------------------------------------------------------------
 
 
 
