@@ -11,14 +11,40 @@ imsize = [shape(1) shape(2)];
 %sampling
 sampleFraction = 0.5;
 [sampled_image, mask] = SampleImage(image, sampleFraction);
+figure
+imshow(image_full);
+title("Original image")
+
+
 
 
 
 %separate matrix completion algorithm here...
-opts_matrix = []; %input options vector
-SeparateMatrixCompletion(sampled_image, mask, opts_matrix);
+
+%note: please do not touch these settings
+delta = 1;     %stepsize: between 0 and 2 should work
+eps = 1e-10;    %fro norm tolerance: past this point break loop
+tau = 0.2;     %threshold step size
+l = 1;         %not in use currently, should be related to size of svd later for speedup
+kmax = 300;    %max iterations
+k0 = 1;        %initial guess magnitude
+opts_matrix = [delta eps tau l kmax k0]; %input options vector
 
 
+[rec_img_matrix, rel_error_matrix] = SeparateMatrixCompletion(sampled_image, mask, opts_matrix);
+figure
+imshow(rec_img_matrix * 255) % rescaling to 0-255 RGB dynamic range
+title("Reconstructed image via separate channel matrix completion")
+
+figure
+semilogy(1:kmax, rel_error_matrix(:,1), color='red')
+hold on
+semilogy(1:kmax, rel_error_matrix(:,2),color='green')
+semilogy(1:kmax, rel_error_matrix(:,3),color='blue')
+title("Convergence of each individual channel, relative errors per channel")
+xlabel("Iteration number")
+ylabel("Relative frobenius norm of mismatch per channel")
+legend("Red channel", "Green channel", "Blue channel")
 
 %tensor completion algorithm here
 opts_tensor = [];

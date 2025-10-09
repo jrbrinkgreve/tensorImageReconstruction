@@ -1,0 +1,10 @@
+[U, S, V] = pagesvd(sampled_image)
+
+S(S<0.05) = 0
+
+
+rec_img = pagemtimes(U,S)
+rec_img = pagemtimes(rec_img, V');
+
+
+imshow(rec_img)

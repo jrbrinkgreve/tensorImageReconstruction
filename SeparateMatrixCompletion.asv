@@ -1,4 +1,4 @@
-function [rec_img, rel_error] = SeparateMatrixCompletion(sampled_image, mask, opts)
+function rec_img = SeparateMatrixCompletion(sampled_image, mask, opts)
 
 
 
@@ -76,10 +76,10 @@ k0 = opts(6);
 %initializations
 X = zeros(shape); 
 sampled_image_norm = pagenorm(sampled_image, 'fro');
-rel_error = zeros(kmax, channels);
+rel_error = zeros(kmax, channels);l
 
 %loop over separate channels
-parfor c = 1:channels
+for c = 1:channels
 Y = k0 * delta * sampled_image(:,:,c);
     
 
@@ -88,21 +88,20 @@ Y = k0 * delta * sampled_image(:,:,c);
        [U,S,V] = svd(Y);   %do the SVD
         S = max(S-tau, 0);  %threshold
         X(:,:,c) = U*S*V';   %construct low rank approximation
-   
-        rel_error(k, c) = norm(mask.*(X(:,:,c)-sampled_image(:,:,c)), 'fro') / sampled_image_norm(:,:,c);   %print error per channel
-        
+    
+        rel_error() = norm(mask.*(X(:,:,c)-sampled_image(:,:,c)), 'fro') / sampled_image_norm(:,:,c);   %print error per channel
+
+
         if rel_error(k, c) < eps
             break
         end
 
         %gradient step
         Y = Y + delta * mask.* (sampled_image(:,:,c) - X(:,:,c));
-        
+    
     end
 end
 
 %return image
 rec_img = X;
-
-
 end
