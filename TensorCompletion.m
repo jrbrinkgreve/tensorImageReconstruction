@@ -19,9 +19,8 @@ tsi = reshape(sampled_image, [linspace(4, 4, 9), 3]);  %Tensorized_Sampled_Image
 %get an exact TT of the sampled image
 tt_tsi = TT_SVD(tsi, 1e-16);
 
-
+%------------------------------------------------------------------------------------------------------------
 %do some processing to reconstruct the original image in its TT form:
-
 %some kind of rank minimization algorithm on the TT...
 
 
@@ -34,6 +33,9 @@ tt_tsi = TT_SVD(tsi, 1e-16);
 
 
 
+
+
+%------------------------------------------------------------------------------------------------------------
 
 %reconstruct the tensor from the TT
 rec_tt_tsi = TT_reconstruct(tt_tsi);
