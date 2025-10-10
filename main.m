@@ -36,7 +36,7 @@ delta = 1.5;     %stepsize: between 0 and 2 should work
 eps = 1e-10;    %fro norm tolerance: past this point break loop
 tau = 0.2;     %threshold step size
 l = 1;         %not in use currently, should be related to size of svd later for speedup
-kmax = 1000;    %max iterations, takes about 78 seconds for 1000 iterations (parallel channels)
+kmax = 50;    %max iterations, takes about 78 seconds for 1000 iterations (parallel channels)
 k0 = 1;        %initial guess magnitude
 opts_matrix = [delta eps tau l kmax k0]; %input options vector
 

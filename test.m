@@ -1,7 +1,12 @@
-tensorizedImage = reshape(sampled_image , linspace(16,16)  )
+rec_img = TensorCompletion(image_full, [], []);
+
+figure;
+imshow(rec_img)
 
 
-TT_SVD(image, 1e-5)
+
+
+
 
 
 

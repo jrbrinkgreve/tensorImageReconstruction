@@ -22,7 +22,7 @@ tt_tsi = TT_SVD(tsi, 1e-16);
 
 %do some processing to reconstruct the original image in its TT form:
 
-%some kind of rank minimization algorithm on the TT...
+%some kind 
 
 
 
