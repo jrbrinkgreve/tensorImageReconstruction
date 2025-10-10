@@ -1,4 +1,6 @@
 %the main file from which subfunctions can be called
+addpath('./funcs');
+
 close all
 %preprocessing
 image_full = double(imread("4.2.07.tiff")) / 255; 

@@ -25,7 +25,7 @@ function [rec_img, rel_error] = SeparateMatrixCompletion(sampled_image, mask, op
 %           opts(1) = delta   : Step size parameter (affects convergence speed)
 %           opts(2) = eps     : Convergence tolerance (relative error threshold)
 %           opts(3) = tau     : Singular value shrinkage threshold
-%           opts(4) = ℓ       : (Currently unused; kept for compatibility)
+%           opts(4) = l       : (Currently unused; kept for compatibility)
 %           opts(5) = kmax    : Maximum number of iterations
 %           opts(6) = k0      : Initialization scaling parameter
 %

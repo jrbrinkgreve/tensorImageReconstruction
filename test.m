@@ -1,9 +1,10 @@
-[U, S, V] = pagesvd(sampled_image);
-
-S(S<0.05) = 0;
-
-rec_img = pagemtimes(U,S);
-rec_img = pagemtimes(rec_img, permute(V,[2 1 3] ));
+tensorizedImage = reshape(sampled_image , linspace(16,16)  )
 
 
-imshow(rec_img * 255)
+TT_SVD(image, 1e-5)
+
+
+
+
+
+
