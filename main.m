@@ -113,10 +113,10 @@ legend("Red channel", "Green channel", "Blue channel")
 
 %tensor completion algorithm here
 opts_tensor = [];
-TensorCompletion(sampled_image, mask, opts_tensor);
+rec_img = TensorCompletion(sampled_image, mask, opts_tensor);
 
-
-
+figure;
+imshow(rec_img*255) % *255 for scaling of image
 
 
 %postprocessing / data visualization / convergence plots etc
