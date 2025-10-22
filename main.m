@@ -11,8 +11,7 @@ imsize = [shape(1) shape(2)];
 
 
 %sampling
-sampleFraction = 0.5;
-[sampled_image, mask] = SampleImage(image, sampleFraction);
+
 figure
 imshow(image_full);
 title("Original image")

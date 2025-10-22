@@ -1,4 +1,4 @@
-function [tt_cores,rel_error] = TT_SVD(tensor, epsilon)
+function [tt_cores,rel_error,ranks] = TT_SVD(tensor, epsilon)
 %TT_SVD(tensor,epsilon) 
 %   Algorithm that decomposes a given N-th order tensor into tensor train format
 %INPUT:
