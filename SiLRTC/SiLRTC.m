@@ -54,7 +54,7 @@ while true
         [U, S, V] = svd(X_n, 'econ');
 
         tau = thresholder(S,th);
-        S_new = wthresh(S, 's', tau);
+        S_new = max(S-tau, 0);
         M{n} = U * S_new * V';
     
         % Fold back to tensor form
