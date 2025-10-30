@@ -1,5 +1,5 @@
 clearvars; close all; clc;
-
+addpath('./funcs');
 img = double(imread("4.2.07.tiff"));
 dims = [repmat(4,1,9), 3];      
 N = numel(dims);

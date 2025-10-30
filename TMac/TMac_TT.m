@@ -1,7 +1,7 @@
 clear
 close all 
 clc
-
+addpath('./funcs');
 dims = [repmat(4,1,9),3];
 N = numel(dims);
 sample = 0.2;
